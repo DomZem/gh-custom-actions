@@ -20,7 +20,9 @@ function run() {
 	// AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set in the action environment
 	exec.exec(`aws s3 sync ${distFolder} ${s3Uri} --region ${bucketRegion} --delete`);
 
-	core.notice('Hello from my custom JavaScript action!');
+	// 3) Set output values
+	const websiteUrl = `http://${bucket}.s3-website.${bucketRegion}.amazonaws.com`;
+	core.setOutput('website-url', websiteUrl);
 }
 
 run();
